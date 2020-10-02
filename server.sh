@@ -9,8 +9,8 @@ $sockets=$ROOT"/sockets" # Путь до папки с сокетами
 cd $ROOT
 case "$1" in
     "start")
-        sudo su - $cuser -c "uwsgi --ini $ROOT/$config" -s /bin/sh    
         sudo chmod o+w $sockets
+        sudo su - $cuser -c "uwsgi --ini $ROOT/$config" -s /bin/sh    
         ;;
     "stop")
         sudo su - $cuser -c "kill -9 `cat $pidfile`" -s /bin/sh
