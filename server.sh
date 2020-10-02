@@ -5,10 +5,12 @@ cuser=uwsgi #Пользователь под которым запускать �
 ROOT="/path/to/project/$name" #Путь до проекта 
 pidfile=$ROOT/$name.pid 
 config=$name"_uwsgi.ini" # Название конфигурационного ini файла
+$sockets=$ROOT"/sockets" # Путь до папки с сокетами
 cd $ROOT
 case "$1" in
     "start")
-        sudo su - $cuser -c "uwsgi --ini $ROOT/$config" -s /bin/sh       
+        sudo su - $cuser -c "uwsgi --ini $ROOT/$config" -s /bin/sh    
+        sudo chmod o+w $sockets
         ;;
     "stop")
         sudo su - $cuser -c "kill -9 `cat $pidfile`" -s /bin/sh
